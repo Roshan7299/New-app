@@ -1,1 +1,23 @@
+name: Encrypt SSH Key
+
+on: [push]
+
+jobs:
+  encrypt:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      - name: Encrypt private key
+        run: |
+          echo %PRIVATE_KEY% > private_key
+          move private_key "C:\Users\runneradmin\.ssh\id_rsa"
+        env:
+          PRIVATE_KEY: ${{ secrets.UNENCRYPTED_PRIVATE_KEY }}
 
