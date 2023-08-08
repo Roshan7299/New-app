@@ -1,0 +1,30 @@
+name: Deploy HTML Page
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Start HTTP server
+        run: |
+          echo "Starting HTTP server..."
+          python3 -m http.server 8080 &
+
+      - name: Deploy to Servers
+        env:
+          SERVER_1: ${{ secrets.SERVER_1 }}  # Add your server details as secrets
+          SERVER_2: ${{ secrets.SERVER_2 }}
+        run: |
+          echo "Deploying to Server 1..."
+          ssh user@${SERVER_1} "cd /path/to/deployment; git pull origin main"
+
+          echo "Deploying to Server 2..."
+          ssh user@${SERVER_2} "cd /path/to/deployment; git pull origin main"
