@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: app-new
+    runs-on: new-app
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
