@@ -21,7 +21,7 @@ jobs:
 
       - name: Copy HTML App to Server
         run: |
-          scp -i /root/.ssh/id_rsa -r home/* ec2-user@3.86.219.251:/home/
+          scp -i sudo /root/.ssh/id_rsa -r home/* ec2-user@3.86.219.251:/home/
           # Add server kk
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock  # Optional, required if you use ssh-agent
