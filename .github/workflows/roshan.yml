@@ -1,0 +1,27 @@
+name: Deploy HTML App to Servers
+
+on:
+  push:
+      branches:
+            - main  # Adjust this to your default branch
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          echo "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+
+      - name: Copy HTML App to Servers
+        run: |
+          scp -r home/* ec2-user@3.86.219.251:/home/
+          # Add server kk
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock  # Optional, required if you use ssh-agent
