@@ -3,7 +3,7 @@ name: Deploy HTML App to Servers
 on:
   push:
     branches:
-      - main  # Adjust this to your default branch
+      - main  # Adjust this to your default branc
 
 jobs:
   deploy:
