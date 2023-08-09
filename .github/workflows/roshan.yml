@@ -2,13 +2,12 @@ name: Deploy HTML App to Servers
 
 on:
   push:
-    branches:
-      - main  # Adjust this to your default branch
+      branches:
+            - main  # Adjust this to your default branch
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest  # Use 'ubuntu-latest' for compatibility
-
+    runs-on: self-hosted
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -22,7 +21,7 @@ jobs:
 
       - name: Copy HTML App to Server
         run: |
-          scp -i /root/.ssh/id_rsa -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -r ./home/* ec2-user@3.86.219.251:/home/
-          # Add more servers as needed
+          scp -i sudo /root/.ssh/id_rsa -r home/* ec2-user@3.86.219.251:/home/
+          # Add server kk
         env:
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock  # Optional, required if you use ssh-agen
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock  # Optional, required if you use ssh-agent
