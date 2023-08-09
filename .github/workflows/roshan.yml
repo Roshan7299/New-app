@@ -25,4 +25,4 @@ jobs:
 
           # Add server kk
         env:
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock  # Optional, required if you use ssh-agent
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock  # Optional, required if you use ssh-agen
