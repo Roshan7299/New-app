@@ -22,7 +22,7 @@ jobs:
       - name: Copy HTML App to Servers
         run: |
           scp -r home/* ec2-user@3.86.219.251:/home/
-          # Add more servers as needed
+          # Add more servers 
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock  # Optional, required if you use ssh-agent
 
