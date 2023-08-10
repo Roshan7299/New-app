@@ -24,6 +24,7 @@ jobs:
 
     - name: Run tests
       run: |
-        cd src
-        python -m pytest addition.py
+        cd /home/ubuntu/actions-runner/src
+         python -m pytest addition.py
+
 
