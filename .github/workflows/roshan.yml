@@ -24,7 +24,12 @@ jobs:
 
     - name: Run tests
       run: |
-        cd /home/ubuntu/actions-runner/src
-         python -m pytest addition.py
+       export PYTEST_CACHE_DIR=/home/ubuntu
+       cd /home/ubuntu/actions-runner/src
+       python -m pytest addition.py
+       env:
+          pythonLocation: /home/ubuntu/actions-runner/_work/_tool/Python/3.9.17/x64
+          LD_LIBRARY_PATH: /home/ubuntu/actions-runner/_work/_tool/Python/3.9.17/x64/lib
+
 
 
