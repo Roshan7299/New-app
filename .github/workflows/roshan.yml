@@ -1,4 +1,4 @@
-name: Hello World with HTML
+name: HTML Server
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
     - name: Checkout code
@@ -19,8 +19,8 @@ jobs:
         <html>
         <head>
          <title>CPU and Memory Usage Monitor</title>
-         <script>
-        function updateMetrics() {
+          <script>
+          function updateMetrics() {
             // Get CPU and memory usage
             var cpuUsage = performance.now();
             var memoryUsage = (performance.memory.usedJSHeapSize / 1024 / 1024).toFixed(2);
@@ -31,13 +31,13 @@ jobs:
         }
 
         setInterval(updateMetrics, 1000); // Update every second
-         </script>
-           </head>
-             <body>
+        </script>
+        </head>
+        <body>
         <h1>CPU and Memory Usage Monitor</h1>
-         <p><strong>CPU Usage:</strong> <span id="cpuUsage">0.00 ms</span></p>
-         <p><strong>Memory Usage:</strong> <span id="memoryUsage">0.00 MB</span></p>
-         </body>
+        <p><strong>CPU Usage:</strong> <span id="cpuUsage">0.00 ms</span></p>
+        <p><strong>Memory Usage:</strong> <span id="memoryUsage">0.00 MB</span></p>
+        </body>
         </html>' > $HOME/index.html
 
     - name: Start HTTP server
@@ -49,7 +49,5 @@ jobs:
       run: |
         curl -s http://localhost:8080
 
-        
-        
 
 
