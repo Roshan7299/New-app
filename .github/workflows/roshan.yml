@@ -15,17 +15,14 @@ jobs:
 
       - name: Set up SSH
         run: |
-         mkdir -p ~/.ssh
-         echo "Creating ~/.ssh directory"
-         echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-         echo "Wrote private key to ~/.ssh/id_rsa"
-         chmod 600 ~/.ssh/id_rsa
-         echo "Changed permissions of ~/.ssh/id_rsa"
-         ssh-keyscan -H 44.203.3.209 >> ~/.ssh/known_hosts
+          mkdir -p ~/.ssh
+          echo "Creating ~/.ssh directory"
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          echo "Wrote private key to ~/.ssh/id_rsa"
+          chmod 600 ~/.ssh/id_rsa
+          echo "Changed permissions of ~/.ssh/id_rsa"
+          ssh-keyscan -H 44.203.3.209 >> ~/.ssh/known_hosts
           echo "Added host key to ~/.ssh/known_hosts"
-          shell: /usr/bin/bash -e {0}
-
-
 
       - name: Deploy to Server
         run: |
