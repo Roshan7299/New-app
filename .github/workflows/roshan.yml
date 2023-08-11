@@ -50,3 +50,6 @@ jobs:
       - name: Test HTML server
         run: |
           curl -s http://localhost:8080
+
+      - name: Deploy with rsync
+        run: rsync -avz ./roshan.html ubuntu@44.202.235.93:/home/ubuntu/
