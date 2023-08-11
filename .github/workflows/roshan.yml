@@ -9,16 +9,18 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    uses: shimataro/ssh-key-action@v2
-    with:
-      key: ${{ secrets.SSH_PRIVATE_KEY }}
-      known_hosts: |
-       44.202.235.93 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBFOxG3tBCdHLEQyxbumEPCQMUzqU60djlw4V3486VuMIsaBt6aulS7KoYmcYWLZpNu/JAz0dkjTRMYQwKA54lm0=
+    steps:
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: |
+            44.202.235.93 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNT ...
 
-       - name: rsync over SSH
+      - name: rsync over SSH
         run: rsync -r ./foo/ user@remote:bar/
 
-       - name: Deploy to Server
+      - name: Deploy to Server
         run: |
           echo '<!DOCTYPE html>
             <html>
@@ -29,12 +31,10 @@ jobs:
               // Get CPU and memory usage
               var cpuUsage = performance.now();
               var memoryUsage = (performance.memory.usedJSHeapSize / 1024 / 1024).toFixed(2);
-
               // Update the display
               document.getElementById("cpuUsage").textContent = cpuUsage.toFixed(2) + " ms";
               document.getElementById("memoryUsage").textContent = memoryUsage + " MB";
             }
-
             setInterval(updateMetrics, 1000); // Update every second
             </script>
             </head>
