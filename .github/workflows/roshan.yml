@@ -9,20 +9,16 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Install SSH key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_KEY }}
-          name: id_rsa # optional
-          known_hosts: ${{ secrets.KNOWN_HOSTS }}
-          config: ${{ secrets.CONFIG }} # ssh_config; optional
-          if_key_exists: fail # replace / ignore / fail; optional (defaults to fail)
+    uses: shimataro/ssh-key-action@v2
+    with:
+      key: ${{ secrets.SSH_PRIVATE_KEY }}
+      known_hosts: |
+       44.202.235.93 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBFOxG3tBCdHLEQyxbumEPCQMUzqU60djlw4V3486VuMIsaBt6aulS7KoYmcYWLZpNu/JAz0dkjTRMYQwKA54lm0=
 
-      - name: rsync over SSH
+       - name: rsync over SSH
         run: rsync -r ./foo/ user@remote:bar/
 
-      - name: Deploy to Server
+       - name: Deploy to Server
         run: |
           echo '<!DOCTYPE html>
             <html>
