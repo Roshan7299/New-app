@@ -17,8 +17,6 @@ jobs:
           known_hosts: |
             44.202.235.93 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNT ...
 
-      - name: rsync over SSH
-        run: rsync -r ./foo/ user@remote:bar/
 
       - name: Deploy to Server
         run: |
