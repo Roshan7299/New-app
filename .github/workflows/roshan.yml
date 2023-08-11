@@ -17,7 +17,6 @@ jobs:
           known_hosts: |
             44.202.235.93 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNT ...
 
-
       - name: Deploy to Server
         run: |
           echo '<!DOCTYPE html>
@@ -51,7 +50,3 @@ jobs:
       - name: Test HTML server
         run: |
           curl -s http://localhost:8080
-
-
-          
-          
