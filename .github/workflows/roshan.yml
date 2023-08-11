@@ -19,22 +19,22 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H 44.203.3.209 >> ~/.ssh/known_hosts
-          
+
       - name: Deploy to Server
-         run: |
-            echo '<!DOCTYPE html>
+        run: |
+          echo '<!DOCTYPE html>
             <html>
             <head>
             <title>CPU and Memory Usage Monitor</title>
             <script>
             function updateMetrics() {
-            // Get CPU and memory usage
-            var cpuUsage = performance.now();
-            var memoryUsage = (performance.memory.usedJSHeapSize / 1024 / 1024).toFixed(2);
+              // Get CPU and memory usage
+              var cpuUsage = performance.now();
+              var memoryUsage = (performance.memory.usedJSHeapSize / 1024 / 1024).toFixed(2);
 
-            // Update the display
-            document.getElementById("cpuUsage").textContent = cpuUsage.toFixed(2) + " ms";
-            document.getElementById("memoryUsage").textContent = memoryUsage + " MB";
+              // Update the display
+              document.getElementById("cpuUsage").textContent = cpuUsage.toFixed(2) + " ms";
+              document.getElementById("memoryUsage").textContent = memoryUsage + " MB";
             }
 
             setInterval(updateMetrics, 1000); // Update every second
@@ -47,11 +47,11 @@ jobs:
             </body>
             </html>' > $HOME/index.html
 
-    - name: Start HTTP server
-      run: |
-        python3 -m http.server 8080 --bind 0.0.0.0 --directory $HOME &
-        sleep 5  # Wait for the server to start
+      - name: Start HTTP server
+        run: |
+          python3 -m http.server 8080 --bind 0.0.0.0 --directory $HOME &
+          sleep 5  # Wait for the server to start
 
-    - name: Test HTML server
-      run: |
-        curl -s http://localhost:8080
+      - name: Test HTML server
+        run: |
+          curl -s http://localhost:8080
