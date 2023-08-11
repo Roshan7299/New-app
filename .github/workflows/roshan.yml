@@ -19,15 +19,15 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H 44.203.3.209 >> ~/.ssh/known_hosts
-
+          
       - name: Deploy to Server
-        run: |
-          echo '<!DOCTYPE html>
-          <html>
-          <head>
-          <title>CPU and Memory Usage Monitor</title>
-          <script>
-          function updateMetrics() {
+         run: |
+            echo '<!DOCTYPE html>
+            <html>
+            <head>
+            <title>CPU and Memory Usage Monitor</title>
+            <script>
+            function updateMetrics() {
             // Get CPU and memory usage
             var cpuUsage = performance.now();
             var memoryUsage = (performance.memory.usedJSHeapSize / 1024 / 1024).toFixed(2);
@@ -35,17 +35,17 @@ jobs:
             // Update the display
             document.getElementById("cpuUsage").textContent = cpuUsage.toFixed(2) + " ms";
             document.getElementById("memoryUsage").textContent = memoryUsage + " MB";
-         }
+            }
 
-         setInterval(updateMetrics, 1000); // Update every second
-         </script>
-         </head>
-         <body>
-         <h1>CPU and Memory Usage Monitor</h1>
-         <p><strong>CPU Usage:</strong> <span id="cpuUsage">0.00 ms</span></p>
-         <p><strong>Memory Usage:</strong> <span id="memoryUsage">0.00 MB</span></p>
-         </body>
-         </html>' > $HOME/index.html
+            setInterval(updateMetrics, 1000); // Update every second
+            </script>
+            </head>
+            <body>
+            <h1>CPU and Memory Usage Monitor</h1>
+            <p><strong>CPU Usage:</strong> <span id="cpuUsage">0.00 ms</span></p>
+            <p><strong>Memory Usage:</strong> <span id="memoryUsage">0.00 MB</span></p>
+            </body>
+            </html>' > $HOME/index.html
 
     - name: Start HTTP server
       run: |
