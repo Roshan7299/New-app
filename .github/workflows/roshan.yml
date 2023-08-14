@@ -27,12 +27,12 @@ jobs:
       - name: Deploy HTML Server
         run: |
           # Copy index.html to the server using SCP
-          scp -i ~/.ssh/id_rsa index.html ubuntu@${{ matrix.server }}:~/index.html
+          scp -i ~/.ssh/id_rsa index.html ubuntu@:52.87.156.47~/index.html
 
       - name: Test Deployment
         run: |
           # Test the deployed server
-          curl http://${{ matrix.server }}:8080/index.html
+          curl http://52.87.156.47:8080/index.html
 
 
 
