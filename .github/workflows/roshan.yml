@@ -6,41 +6,31 @@ on:
       - main
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
+  deploy_server:
+    runs-on: self-hosted
+    strategy:
+      matrix:
+        server: ["52.87.156.47"]  # Add more servers as needed
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Create index.html
-      run: |
-        echo '<!DOCTYPE html>
-        <html>
-        <head>
-         <title>CPU and Memory Usage Monitor</title>
-          <script>
-          function updateMetrics() {
-            // Get CPU and memory usage
-            var cpuUsage = performance.now();
-            var memoryUsage = (performance.memory.usedJSHeapSize / 1024 / 1024).toFixed(2);
+      - name: Set up SSH
+        run: |
+          # Set up SSH for the specific server
+          # You can use your SSH private key variable here
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ matrix.server }} >> ~/.ssh/known_hosts
 
-            // Update the display
-            document.getElementById("cpuUsage").textContent = cpuUsage.toFixed(2) + " ms";
-            document.getElementById("memoryUsage").textContent = memoryUsage + " MB";
-        }
+      - name: Deploy HTML Server
+        run: |
+          # Copy index.html to the server using SCP
+          scp -i ~/.ssh/id_rsa index.html ubuntu@${{ matrix.server }}:~/index.html
 
-        setInterval(updateMetrics, 1000); // Update every second
-        </script>
-        </head>
-        <body>
-        <h1>CPU and Memory Usage Monitor</h1>
-        <p><strong>CPU Usage:</strong> <span id="cpuUsage">0.00 ms</span></p>
-        <p><strong>Memory Usage:</strong> <span id="memoryUsage">0.00 MB</span></p>
-        </body>
-        </html>' > $HOME/index.html
+      - name: Test Deployment
+        run: |
+          # Test the deployed server
+          curl http://${{ matrix.server }}:8080/index.html
 
-    - name: Start HTML Server
-      run: |
-        python3 -m http.server 8080 --bind 0.0.0.0 --directory $HOME &
-        sleep 100  # Wait for the server to start
