@@ -10,17 +10,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Install SSH Key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          known_hosts: |
-            |1|+pvqj+rW2pdaRLukZNCXELOjn64=|FR7cJeBNNG//WIRSOFY31tAykh4= ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDR7/EV1y1eaXqJ7JpYGsu7wLirnBfuEPhR2P5XFir+2K8sKla1VwoKbDarLYcbTYQH+FRuPV+aWjsJdXRxd6VbtgvLB+Zy3qa00c29o91TYnkk7Qipu/mUfkfSBM0RY2KbxJuHl79oRvNYX+KSyb60rygg9dFgHYrYhG9TW4No69LYZ5EYdSiYLEVkDjPfQ3VxHMH8w1JBAFvRV3LOoKqRDLljccPMhATWzEqap/PPLT0BZAFUmmdOeCmEc3PbjGvlN3VSgA9EApYUZ9odCvFnX2F0yIYQJQRp/gcjm9W6bOndElU4JTLBo5siETltfAEiddKgY/02Ya0VMfvbL2oFuaSyMenTHeE5SlH53VG6M7kPcLG5mja9FmHEDIm6wspiPeg1PJdOPPI3I5ieXPHzPA98MtccvdalI9uTuKSQgJ5RS/eeu3x2Ong7qSI4JLrMKfHCNQdZjuRVk299jUFEzqBXu0pvQ51MhEIAevk/eYMEx6QHVJSCct1uxsifRM=
-      
       - name: Checkout repository
         uses: actions/checkout@v2
 
       - name: Deploy to Server
+        env:
+          SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          echo $SSH_KEY | base64 -d > ssh-key
+          chmod 400 ssh-key
+          ssh -i ssh-key -o StrictHostKeyChecking=no ubuntu@44.201.125.159 "cd /home/ubuntu/sample-app-deployment-with-github-actions && GIT_SSH_COMMAND='ssh -i /home/ubuntu/.ssh/ssh-key' git pull origin main"
+
+       - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Code Deploy 
         run: |
           echo '<!DOCTYPE html>
             <html>
@@ -53,10 +57,3 @@ jobs:
       - name: Test HTML server
         run: |
           curl -s http://localhost:8080
-
-      - name: Deploy with rsync
-        run: |
-          rsync -avz $GITHUB_WORKSPACE/index.html ubuntu@54.197.11.232:~/index.html
-        env:
-          GITHUB_WORKSPACE: ${{ github.workspace }}
-
