@@ -15,7 +15,10 @@ jobs:
         with:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           known_hosts: |
-            44.202.235.93 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNT ...
+            54.197.11.232 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNT ...
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
       - name: Deploy to Server
         run: |
@@ -52,4 +55,8 @@ jobs:
           curl -s http://localhost:8080
 
       - name: Deploy with rsync
-        run: rsync -avz ./roshan.html ubuntu@44.202.235.93:/home/ubuntu/
+        run: |
+          rsync -avz $GITHUB_WORKSPACE/index.html ubuntu@54.197.11.232:~/index.html
+        env:
+          GITHUB_WORKSPACE: ${{ github.workspace }}
+
