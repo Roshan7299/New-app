@@ -59,4 +59,3 @@ jobs:
           rsync -avz $GITHUB_WORKSPACE/index.html ubuntu@54.197.11.232:~/index.html
         env:
           GITHUB_WORKSPACE: ${{ github.workspace }}
-
