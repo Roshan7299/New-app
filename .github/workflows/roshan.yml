@@ -18,15 +18,15 @@ jobs:
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/ssh-key
           chmod 600 ~/.ssh/ssh-key
-          ssh-keyscan -H 44.201.125.159 >> ~/.ssh/known_hosts
+          ssh-keyscan -H 52.87.156.47 >> ~/.ssh/known_hosts
 
       - name: Deploy GitHub Actions file
         run: |
-           echo 'Copying GitHub Actions file to server...'
-           scp -i /home/ubuntu/ssh-key .github/workflows/index.html ubuntu@44.201.125.159:~/.
-
+          echo 'Copying GitHub Actions file to server...'
+          scp -i /home/ubuntu/.ssh/ssh-key .github/workflows/index.html ubuntu@52.87.156.47:~/index.html
 
       - name: Test Deployment
         run: |
           echo 'Testing deployment...'
-          curl http://44.201.125.159/index.html
+          curl http://52.87.156.47/index.html
+
