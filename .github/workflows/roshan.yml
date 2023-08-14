@@ -40,4 +40,7 @@ jobs:
         </body>
         </html>' > $HOME/index.html
 
-        
+    - name: Start HTML Server
+      run: |
+        python3 -m http.server 8080 --bind 0.0.0.0 --directory $HOME &
+        sleep 100  # Wait for the server to start
