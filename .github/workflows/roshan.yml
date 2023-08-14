@@ -33,6 +33,9 @@ jobs:
       - name: Test Deployment
         run: |
           # Test the deployed server
+
+
+          
           curl http://52.87.156.47:8080/index.html
 
 
