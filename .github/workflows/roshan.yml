@@ -21,10 +21,10 @@ jobs:
           chmod 400 ssh-key
           ssh -i ssh-key -o StrictHostKeyChecking=no ubuntu@44.201.125.159 "cd /home/ubuntu/sample-app-deployment-with-github-actions && GIT_SSH_COMMAND='ssh -i /home/ubuntu/.ssh/ssh-key' git pull origin main"
 
-       - name: Checkout repository
+      - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Code Deploy 
+      - name: Code Deploy
         run: |
           echo '<!DOCTYPE html>
             <html>
