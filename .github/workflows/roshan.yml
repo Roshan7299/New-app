@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy_server:
-    runs-on: self-hosted
+    runs-on: ubuntu-server
     strategy:
       matrix:
         server: ["52.87.156.47"]  # Add more servers as needed
