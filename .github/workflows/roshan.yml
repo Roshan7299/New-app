@@ -16,8 +16,8 @@ jobs:
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/ssh-key
+          chmod 600 ~/.ssh/ssh-key
           ssh-keyscan -H 44.201.125.159 >> ~/.ssh/known_hosts
 
       - name: Deploy GitHub Actions file
