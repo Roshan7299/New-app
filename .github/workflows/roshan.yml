@@ -27,7 +27,8 @@ jobs:
       - name: Deploy HTML Server
         run: |
           # Copy index.html to the server using SCP
-          scp -i ~/.ssh/id_rsa index.html ubuntu@52.87.156.47:~/index.html
+          scp -v -i ~/.ssh/id_rsa index.html ubuntu@52.87.156.47:~/index.html
+
 
 
       - name: Test Deployment
