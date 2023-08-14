@@ -13,14 +13,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up SSH
+      - name: Deploy code to Server
+        env:
+          SSH_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
-          mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H 44.201.125.159 >> ~/.ssh/known_hosts
+          echo $SSH_KEY | base64 -d > ssh-key
+          chmod 400 ssh-key
+          ssh -i ssh-key -o StrictHostKeyChecking=no ubuntu@44.201.125.159 "cd /home/ubuntu/sample-app-deployment-with-github-actions && GIT_SSH_COMMAND='ssh -i /home/ubuntu/.ssh/ssh-key' git pull origin main"
 
-      - name: Deploy to Server
+      - name: Deploy HTML to Server
         run: |
           echo '<!DOCTYPE html>
           <html>
@@ -55,5 +56,3 @@ jobs:
       - name: Test HTML server
         run: |
           curl -s http://localhost:8080
-
-          
