@@ -23,7 +23,7 @@ jobs:
       - name: Deploy GitHub Actions file
         run: |
            echo 'Copying GitHub Actions file to server...'
-           scp -i /home/ubuntu/ssh-key .github/workflows/index.html ubuntu@44.201.125.159:~/index.html
+           scp -i /home/ubuntu/ssh-key .github/workflows/index.html ubuntu@44.201.125.159:~/.
 
 
       - name: Test Deployment
