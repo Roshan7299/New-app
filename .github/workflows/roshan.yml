@@ -18,30 +18,30 @@ jobs:
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H 44.203.3.209 >> ~/.ssh/known_hosts
+          ssh-keyscan -H 44.201.125.159 >> ~/.ssh/known_hosts
 
       - name: Deploy to Server
         run: |
           echo '<!DOCTYPE html>
           <html>
           <head>
-          <title>CPU and Memory Usage Monitor</title>
-          <script>
-          function updateMetrics() {
-            // Get CPU and memory usage
-            var cpuUsage = performance.now();
-            var memoryUsage = (performance.memory.usedJSHeapSize / 1024 / 1024).toFixed(2);
+           <title>CPU and Memory Usage Monitor</title>
+            <script>
+            function updateMetrics() {
+              // Get CPU and memory usage
+              var cpuUsage = performance.now();
+              var memoryUsage = (performance.memory.usedJSHeapSize / 1024 / 1024).toFixed(2);
 
-            // Update the display
-            document.getElementById("cpuUsage").textContent = cpuUsage.toFixed(2) + " ms";
-            document.getElementById("memoryUsage").textContent = memoryUsage + " MB";
+              // Update the display
+              document.getElementById("cpuUsage").textContent = cpuUsage.toFixed(2) + " ms";
+              document.getElementById("memoryUsage").textContent = memoryUsage + " MB";
           }
 
           setInterval(updateMetrics, 1000); // Update every second
           </script>
           </head>
           <body>
-           <h1>CPU and Memory Usage Monitor</h1>
+          <h1>CPU and Memory Usage Monitor</h1>
           <p><strong>CPU Usage:</strong> <span id="cpuUsage">0.00 ms</span></p>
           <p><strong>Memory Usage:</strong> <span id="memoryUsage">0.00 MB</span></p>
           </body>
@@ -49,9 +49,9 @@ jobs:
 
       - name: Start HTTP server
         run: |
-         python3 -m http.server 8080 --bind 0.0.0.0 --directory $HOME &
-         sleep 5  # Wait for the server to start
+          python3 -m http.server 8080 --bind 0.0.0.0 --directory $HOME &
+          sleep 5  # Wait for the server to start
 
       - name: Test HTML server
         run: |
-         curl -s http://localhost:8080
+          curl -s http://localhost:8080
