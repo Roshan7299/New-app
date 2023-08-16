@@ -30,9 +30,9 @@ jobs:
           <!-- Your HTML content here -->
           </html>' > $HOME/index.html
 
-      - name: Copy index.html to server
+      - name: Copy index.html using ssh-agent
         run: |
-          scp -i $HOME/.ssh/id_rsa $HOME/index.html $SERVER_USERNAME@$SERVER_ADDRESS:/home/ubuntu
+          scp -o StrictHostKeyChecking=no $HOME/index.html $SERVER_USERNAME@$SERVER_ADDRESS:/home/ubuntu
 
       - name: Start HTTP server
         run: |
