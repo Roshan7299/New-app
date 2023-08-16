@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      SERVER_ADDRESS: 44.203.87.54
+      SERVER_ADDRESS: 54.144.20.111
       SERVER_USERNAME: ubuntu
 
     steps:
