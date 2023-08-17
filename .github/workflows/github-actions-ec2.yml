@@ -21,7 +21,8 @@ jobs:
 
       - name: Deploy to Server
         run: |
-            cp index.html > /home/ubuntu/actions-runner/_work/New-app/
+            cd /home/ubuntu/actions-runner/_work/New-app/
+            cp index.html .
 
       - name: Start HTTP server
         run: |
