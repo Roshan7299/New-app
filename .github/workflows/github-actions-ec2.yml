@@ -25,7 +25,8 @@ jobs:
             <head>
             <title>CPU and Memory Usage Monitor</title>
             <script>
-            function updateMetrics() {
+        
+              function updateMetrics() {
               // Get CPU and memory usage
               var cpuUsage = performance.now();
               var memoryUsage = (performance.memory.usedJSHeapSize / 1024 / 1024).toFixed(2);
