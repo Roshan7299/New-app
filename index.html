@@ -1,9 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>New Project</title>
+<title>CPU and Memory Usage Monitor</title>
+<script>
+        
+function updateMetrics() {
+// Get CPU and memory usage
+var cpuUsage = performance.now();
+var memoryUsage = (performance.memory.usedJSHeapSize / 1024 / 1024).toFixed(2);
+// Update the display
+document.getElementById("cpuUsage").textContent = cpuUsage.toFixed(2) + " ms";
+document.getElementById("memoryUsage").textContent = memoryUsage + " MB";
+}
+setInterval(updateMetrics, 1000); // Update every second
+</script>
 </head>
 <body>
-    <h1>Hello all, this is a new project</h1>
+<h1>CPU and Memory Usage Monitor</h1>
+<p><strong>CPU Usage:</strong> <span id="cpuUsage">0.00 ms</span></p>
+<p><strong>Memory Usage:</strong> <span id="memoryUsage">0.00 MB</span></p>
 </body>
 </html>
