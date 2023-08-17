@@ -43,7 +43,7 @@ jobs:
             <p><strong>CPU Usage:</strong> <span id="cpuUsage">0.00 ms</span></p>
             <p><strong>Memory Usage:</strong> <span id="memoryUsage">0.00 MB</span></p>
             </body>
-            </html>' > $HOME/index.html
+            </html>' > $/home/ubuntu/actions-runner/New-app/New-app/New-app/index.html
 
       - name: Start HTTP server
         run: |
