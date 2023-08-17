@@ -50,6 +50,8 @@ jobs:
           python3 -m http.server 8080 --bind 0.0.0.0 --directory $HOME &
           sleep 5  # Wait for the server to start
 
+          
+
       - name: Test HTML server
         run: |
           curl -s http://localhost:8080
